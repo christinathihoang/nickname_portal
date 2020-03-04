@@ -2,10 +2,31 @@
 <html lang="en">
 <head>
   <title>Kappa Nickname Portal</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  
+          
 </head>
 
 <body>
+  <header>
+    <div class="container">
+      <nav>
+        <ul>
+          <li><a href={{  url_for('login') }}>Login</a></li>
+          <li><a href={{  url_for('submission')  }}>Nickname Submission</a></li>
+          <li><a href={{  url_for('search')  }}>Sisters</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
   {% block content %}
+
   {% endblock %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  
 </body>
 </html>
