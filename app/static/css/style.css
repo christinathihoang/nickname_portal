@@ -1,8 +1,13 @@
 body {
-    margin: 0;
-    background: #D3D3D3;
+  margin: 0;
+  background: #D3D3D3;
 }
 
 header {
-    background: #B30000;
+  background: #B30000;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
 }
