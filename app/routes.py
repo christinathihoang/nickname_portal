@@ -3,8 +3,10 @@ from flask_login import current_user, login_user
 
 from app import app
 from app.forms import LoginForm, NicknameSubmissionForm
-from app.models import User, Sister
+from app.models import User, Sister, Base
 from app.create_db import session
+
+Base.query = session.query()   # allow flask to access User tables
 
 @app.route('/')
 def index():
@@ -14,8 +16,10 @@ def index():
 def login():
   if current_user.is_authenticated:   # if user is already logged in, then they can't go back to login page
     return redirect(url_for('/'))
+    
   form = LoginForm()
   if form.validate_on_submit():   #if form is empty, returns false and renders template
+    user = User.query.filter_by(username=form.username.data).first()    # search db for user
     login_user(user)
     flash('Login requested for user {}, remember_me={}'.format(form.username.data, form.remember_me.data))
     return redirect(url_for('index'))

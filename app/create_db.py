@@ -7,9 +7,8 @@ from app.models import Base, User, Sister, engine
 
 Base.metadata.bind = engine
 
-DBSession = sessionmaker(bind=engine)
-
-session = DBSession()
+Session = sessionmaker(bind=engine)
+session = Session()
 
 
 def load_json(filename):

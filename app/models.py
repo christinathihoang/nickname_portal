@@ -11,6 +11,7 @@ from flask_login import UserMixin
 
 from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
 
+
 Base = declarative_base()
 
 # This callback is used to reload the user object from the user ID stored in the session
