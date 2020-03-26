@@ -11,6 +11,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 
+# loading from json to use as dev data
 def load_json(filename):
   with open(filename) as file:
     jsn = json.load(file)
