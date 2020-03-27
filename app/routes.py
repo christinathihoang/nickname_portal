@@ -18,6 +18,7 @@ def index():
 def register():
   form = RegistrationForm()
   if form.validate_on_submit():
+    # check if user is already in database
     user = User(email=form.email.data)
     user.set_password(form.password.data)
     session.add(user)
