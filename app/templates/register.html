@@ -6,6 +6,7 @@
         <div class="card-panel z-depth-5">
             <h4>Register</h4>
         {{ form.hidden_tag() }}
+
         <p>
             {{ form.email.label }}<br>
             {{ form.email }}<br>
@@ -27,7 +28,7 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>{{ form.submit(class="btn pulse") }}</p>
+        <p>{{ form.submit(class="btn pulse red darken-4") }}</p>
         </div>
     </form>
 </div>

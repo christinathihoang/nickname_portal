@@ -7,21 +7,34 @@
 
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+<!-- Materialize Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Rozha+One&display=swap" rel="stylesheet">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
 
 </head>
 
 <body>
   <header>
-    <div class="container">
+
       <nav>
+        <div class="nav-wrapper red darken-4">
         <ul>
+          <li id="menu-icon"><a href="" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a></li>
+          <li>Nickname Portal</li>
+        </ul>
+      </nav>
+
+
+        <ul id="slide-out" class="sidenav">
+          <li><a href={{  url_for('register') }}>Register</a></li>
           <li><a href={{  url_for('login') }}>Login</a></li>
           <li><a href={{  url_for('submission')  }}>Nickname Submission</a></li>
           <li><a href={{  url_for('search')  }}>Sisters</a></li>
         </ul>
-      </nav>
-    </div>
+
   </header>
   
   {% block content %}
@@ -30,6 +43,7 @@
 
    <!-- Compiled and minified JavaScript -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-          
+  <!-- JavaScript -->
+  <script src="../static/js/index.js"></script>
 </body>
 </html>
