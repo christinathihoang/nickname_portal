@@ -3,22 +3,24 @@
 {% block content %}
 
 <h2>Nickname Submission</h2>
-	<form action="" method="POST" novalidate>
-		{{ form.hidden_tag() }}
-		
-		<p> 
-			{{ form.nickname.label }} <br>
-			{{ form.nickname(size=40) }}
-		</p>
 
-		<p> 
-			{{ form.meaning.label }} <br>
-			{{ form.meaning(size=40) }}
-		</p>
 
-		<p>{{ form.submit() }}</p>
+  <form action="" method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    
+    <p> 
+      {{ form.nickname.label }} <br>
+      {{ form.nickname }}
+    </p>
 
-	</form>
+    <p> 
+      {{ form.meaning.label }} <br>
+      {{ form.meaning }}
+    </p>
+
+    <p>{{ form.submit }}</p>
+
+  </form>
 
 
 {% endblock %}
