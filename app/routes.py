@@ -51,22 +51,6 @@ def login():
     #     return flask.redirect(next or flask.url_for('index'))
   return render_template('login.html', form=form)
 
-# @app.route("/logout")
-# @login_required
-# def logout():
-#     logout_user()
-#     return redirect(somewhere)
-
-
-# @app.route('/login2', methods=['GET', 'POST'])
-# def login2():
-#   form = LoginForm()
-#   if form.validate_on_submit():   #if form is empty, returns false and renders template
-#     flash('Login requested for user {}, remember_me={}'.format(form.username.data, form.remember_me.data))
-#     return redirect(url_for('index'))
-#   return render_template('login2.html', form=form)
-
-
 @app.route('/submission')
 def submission():
 	form = NicknameSubmissionForm()

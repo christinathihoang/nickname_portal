@@ -1,37 +1,68 @@
 {% extends "base.html" %}
 
+{% include "navbar.html" %}
+
 {% block content %}
 
-<div class="container">
-  <table id="table_id" class="display">
-    <thead>
-      <tr>
-        <th>Nickname</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Chapter</th>
-        <th>Class</th>
-        <th>Semester</th>
-        <th>Year</th>
-        <th>Line Number</th>
-      </tr>
-    </thead>
-    <tbody>
+<div class="container search">
+  <div class="row">
 
-      {% for i in sisters %} 
+<div class="col l3">
+
+
+  <div class="card-panel">
+
+      <div class="input-field">
+        <input placeholder="Nickname" id="first_name" type="text" class="validate">
+        <input placeholder="Name" id="first_name" type="text" class="validate">
+        <input placeholder="Chapter" id="first_name" type="text" class="validate">
+        <input placeholder="Class" id="first_name" type="text" class="validate">
+        <input placeholder="Semester" id="first_name" type="text" class="validate">
+        <input placeholder="Line Number" id="first_name" type="text" class="validate">
+      </div>
+
+      <div class=input-field>
+        <button class="btn waves-effect waves-light red darken-4" type="submit" name="action">Search Sisters</button>
+      </div>
+
+  </div>
+</div>
+
+<div class="col l9">
+
+  <div class="card">
+
+    <table>
+      <thead>
         <tr>
-            <td>{{  i.nickname  }}</td>
-            <td>{{  i.firstname  }}</td>
-            <td>{{  i.lastname  }}</td>
-            <td>{{  i.chapter  }}</td>
-            <td>{{  i.sclass  }}</td>
-            <td>{{  i.semester  }}</td>
-            <td>{{  i.year  }}</td>
-            <td>{{  i.linenumber  }}</td>
+          <th>Nickname</th>
+          <th>Name</th>
+          <th>Chapter</th>
+          <th>Class</th>
+          <th>Semester</th>
+          <th>Line Number</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        {% for i in sisters %} 
+          <tr>
+              <td>{{  i.nickname  }}</td>
+              <td>{{  i.firstname  }} {{  i.lastname  }}</td>
+              <td>{{  i.chapter  }}</td>
+              <td>{{  i.sclass  }}</td>
+              <td>{{  i.semester  }} {{  i.year  }}</td>
+              <td>{{  i.linenumber  }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+
+  </div>
+  </div>
+
+</div>
 </div>
 
   <script> 

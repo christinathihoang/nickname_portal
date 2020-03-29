@@ -11,3 +11,7 @@ html, body {
 nav ul {
   list-style-type: none;
 }
+
+.container.search {
+  width: 90%;
+}
