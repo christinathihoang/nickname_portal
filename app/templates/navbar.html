@@ -1,0 +1,23 @@
+{% block content %}
+
+<header>
+
+    <nav>
+      <div class="nav-wrapper red darken-4">
+      <ul>
+        <li id="menu-icon"><a href="" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a></li>
+        <li>Nickname Portal</li>
+      </ul>
+    </nav>
+
+
+      <ul id="slide-out" class="sidenav">
+        <li><a href={{  url_for('register') }}>Register</a></li>
+        <li><a href={{  url_for('login') }}>Login</a></li>
+        <li><a href={{  url_for('submission')  }}>Nickname Submission</a></li>
+        <li><a href={{  url_for('search')  }}>Sisters</a></li>
+      </ul>
+
+</header>
+
+{% endblock content%}
