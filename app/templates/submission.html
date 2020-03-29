@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% include "navbar.html" %}
+
 {% block content %}
 
 
@@ -7,6 +9,25 @@
   <h2>Nickname Submission</h2>
 
   <div class="card">
+
+    <div class="card-content">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="first_name" type="text" class="validate">
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="tree" type="text" class="validate">
+        <label for="tree">Tree</label>
+      </div>
+
+    </div>
 
       <div class="card-tab">
         <ul class="tabs tabs-fixed-width">
@@ -25,12 +46,17 @@
 
             <p> 
               {{ form.nickname.label }} <br>
-              {{ form.nickname }}
+              {{ form.nickname() }}
             </p>
         
             <p> 
               {{ form.meaning.label }} <br>
-              {{ form.meaning }}
+              {{ form.meaning() }}
+            </p>
+
+            <p> 
+              {{ form.pronunciation.label }} <br>
+              {{ form.pronunciation() }}
             </p>
         
             <p>{{ form.submit(class="btn pulse red darken-4") }}</p>

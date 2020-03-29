@@ -23,6 +23,7 @@ class LoginForm(FlaskForm):
 
 
 class NicknameSubmissionForm(FlaskForm):
-	 nickname = StringField('Nickname')
-	 meaning = StringField('Mearning')
-	 submit = SubmitField('Submit Nickname')
+  nickname = StringField('Nickname')
+  meaning = StringField('Meaning')
+  pronunciation = StringField('Pronunciation')
+  submit = SubmitField('Submit Nickname')
