@@ -16,8 +16,8 @@ Base = declarative_base()
 
 class User(UserMixin, Base):
   __tablename__="users"
-  #id = Column(String, primary_key=True)
-  email = Column(String, primary_key=True)
+  id = Column(String, primary_key=True)
+  email = Column(String)
   password_hash = Column(String)
   authenticated = Column(Boolean, default=True)
 
