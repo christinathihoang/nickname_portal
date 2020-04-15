@@ -24,7 +24,7 @@ Base.query = db_session.query_property()
 class User(UserMixin, Base):
   __tablename__= 'users'
 
-  id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
+  id = Column(String, primary_key=True, nullable=False)
   email = Column(String, nullable=False)
   password_hash = Column(String, nullable=False)
   authenticated = Column(Boolean, default=True)
@@ -38,18 +38,20 @@ class User(UserMixin, Base):
   def check_password(self, password):
     return check_password_hash(self.password_hash, password)
   
-  # methods for user class, required for Flask-Login
-  def is_active(self):
-    return True   # all users are active
+  # # methods for user class, required for Flask-Login
+  # def is_active(self):
+  #   return True   # all users are active
 
-  def get_id(self):
-    return self.email   # return email address for Flask-Login
+  # def get_id(self):
+  #   return self.email   # return email address for Flask-Login
 
-  def is_authenticated(self):
-    return self.authenticated
+  # def is_authenticated(self):
+  #   return self.authenticated
 
-  def is_anonymous(self):
-    return False    # anonymous users not allowed
+  # def is_anonymous(self):
+  #   return False    # anonymous users not allowed
+
+  
 
 # This callback is used to reload the user object from the user ID stored in the session
 @login_manager.user_loader

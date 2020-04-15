@@ -7,6 +7,8 @@ from app.forms import RegistrationForm, LoginForm, NicknameSubmissionForm
 from app.models import User, Sister, Base
 from app.create_db import session
 
+import uuid 
+
 Base.query = session.query()   # allow flask to access User tables
 
 @app.route('/')
@@ -21,13 +23,13 @@ def register():
   password = form.password.data
 
   if form.validate_on_submit():
-    
+
     existing = session.query(User).filter_by(email=email).first()
-    print(existing)
+
     if existing:
       return redirect(url_for('login'))
 
-    user = User(email=email)
+    user = User(id=uuid.uuid1().hex,email=email)
     user.set_password(password)
 
     session.add(user)
@@ -35,8 +37,6 @@ def register():
     return redirect(url_for('index'))
 
   return render_template('register.html', title='Register', form=form)
-
-
 
 
 @app.route('/login', methods=['GET', 'POST'])
