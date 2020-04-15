@@ -4,8 +4,8 @@ from flask_login import current_user, login_user
  
 from app import app, db
 from app.forms import RegistrationForm, LoginForm, NicknameSubmissionForm
-from app.models import User, Sister, Base
-from app.create_db import session
+from app.models import User, Sister, Base, session
+# from app.create_db import session
 
 import uuid 
 
@@ -29,7 +29,7 @@ def register():
     if existing:
       return redirect(url_for('login'))
 
-    user = User(id=uuid.uuid1().hex,email=email)
+    user = User(id=str(uuid.uuid1().int),email=email)
     user.set_password(password)
 
     session.add(user)
@@ -42,26 +42,23 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
   if current_user.is_authenticated:   # if user is already logged in, then they can't go back to login page
-    return redirect(url_for('/'))
+    return redirect(url_for('index'))
     
   form = LoginForm()
   if form.validate_on_submit():   #if form is empty, returns false and renders template
-    user = User.query.filter_by(email=form.email.data).first()    # search db for user by email
+    user = session.query(User).filter_by(email=form.email.data).first()    # search db for user by email
 
     if user is None or not user.check_password(form.password.data):
-      flash('You are not registered')
-      return redirect(url_for('/'))
+      return redirect(url_for('login'))
 
     login_user(user, remember=form.remember_me.data)
-    return redirect(url_for('index'))
-    # !!!!!! NEED TO IMPLEMENT CODE TO VALIDATE NEXT PARAMETER!!!
-    # next = flask.request.args.get('next')
-    #     # is_safe_url should check if the url is safe for redirects.
-    #     # See http://flask.pocoo.org/snippets/62/ for an example.
-    #     if not is_safe_url(next):
-    #         return flask.abort(400)
 
-    #     return flask.redirect(next or flask.url_for('index'))
+    # redirecting user back to the page that they were originally trying to access
+    next_page = request.args.get('next')
+    if not next_page or url_parse(next_page).netloc != '':
+      next_page = url_for('index')
+
+    return redirect(next_page or url_for('index'))
   return render_template('login.html', form=form)
 
 @app.route('/submission')

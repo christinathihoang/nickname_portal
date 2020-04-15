@@ -2,13 +2,13 @@ import json, logging
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import IntegrityError
-from app.models import Base, User, Sister, engine
+from app.models import Base, User, Sister, engine, session
 
 
-Base.metadata.bind = engine
+# Base.metadata.bind = engine
 
-Session = sessionmaker(bind=engine)
-session = Session()
+# Session = sessionmaker(bind=engine)
+# session = Session()
 
 
 # loading from json to use as dev data

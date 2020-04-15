@@ -20,6 +20,10 @@ db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind
 Base = declarative_base()
 Base.query = db_session.query_property()
 
+Base.metadata.bind = engine
+
+Session = sessionmaker(bind=engine)
+session = Session()
 
 class User(UserMixin, Base):
   __tablename__= 'users'
@@ -56,7 +60,7 @@ class User(UserMixin, Base):
 # This callback is used to reload the user object from the user ID stored in the session
 @login_manager.user_loader
 def load_user(id):
-  return User.query.get(int(id))
+  return session.query(User).get((id))
 
 
 class Sister(Base):
