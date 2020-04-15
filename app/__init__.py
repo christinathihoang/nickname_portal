@@ -10,7 +10,8 @@ app.config.from_object(DevelopmentConfig())
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-db = SQLAlchemy()   # create without parameters and configure later in models.py
+db = SQLAlchemy(app)
+
 
 # from sqlalchemy.ext.declarative import declarative_base
 # Base = declarative_base()

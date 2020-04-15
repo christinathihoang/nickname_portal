@@ -6,23 +6,31 @@ from config import DevelopmentConfig
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+ 
 from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
 
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
+SQLALCHEMY_DATABASE_URI = 'postgresql://christinahoang:kappas1995@localhost:5432/nickname_portal'
+engine = create_engine(SQLALCHEMY_DATABASE_URI)
+db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
+
 Base = declarative_base()
+Base.query = db_session.query_property()
 
 
 class User(UserMixin, Base):
-  __tablename__="users"
-  id = Column(String, primary_key=True)
-  email = Column(String)
-  password_hash = Column(String)
+  __tablename__= 'users'
+
+  id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
+  email = Column(String, nullable=False)
+  password_hash = Column(String, nullable=False)
   authenticated = Column(Boolean, default=True)
 
   def __repr__(self):
-    return '<User {}>'.format(self.username)
+    return '<User {}>'.format(self.id)
 
   def set_password(self, password):
     self.password_hash = generate_password_hash(password)
@@ -60,9 +68,5 @@ class Sister(Base):
   year = Column(Integer)
   linenumber = Column(Integer)
 
-#SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI', 'postgresql://christinahoang:kappas1995@localhost:5432/nickname_portal')
-SQLALCHEMY_DATABASE_URI = app.config['DATABASE_URL']
-engine = create_engine(SQLALCHEMY_DATABASE_URI)
-
-Base.metadata.drop_all(engine)    # drops all existing dbs
-Base.metadata.create_all(engine)  # creates new dbs
+Base.metadata.drop_all(engine)    # drops all existing tables
+Base.metadata.create_all(engine)  # creates new tables

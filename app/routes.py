@@ -17,14 +17,27 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
   form = RegistrationForm()
+  email = form.email.data
+  password = form.password.data
+
   if form.validate_on_submit():
-    # check if user is already in database
-    user = User(email=form.email.data)
-    user.set_password(form.password.data)
+    
+    existing = session.query(User).filter_by(email=email).first()
+    print(existing)
+    if existing:
+      return redirect(url_for('login'))
+
+    user = User(email=email)
+    user.set_password(password)
+
     session.add(user)
     session.commit()
     return redirect(url_for('index'))
+
   return render_template('register.html', title='Register', form=form)
+
+
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
