@@ -1,5 +1,5 @@
 from flask import Flask, render_template, flash, redirect, url_for, request
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, login_required
 
  
 from app import app, db
@@ -12,6 +12,7 @@ import uuid
 Base.query = session.query()   # allow flask to access User tables
 
 @app.route('/')
+@login_required
 def index():
   return "Kappa Submisson Portal"
 
@@ -55,18 +56,21 @@ def login():
 
     # redirecting user back to the page that they were originally trying to access
     next_page = request.args.get('next')
-    if not next_page or url_parse(next_page).netloc != '':
+    # if not next_page or url_parse(next_page).netloc != '':
+    if not next_page:
       next_page = url_for('index')
 
     return redirect(next_page or url_for('index'))
   return render_template('login.html', form=form)
 
 @app.route('/submission')
+@login_required
 def submission():
 	form = NicknameSubmissionForm()
 	return render_template('submission.html', form=form)
 
 @app.route('/search')
+@login_required
 def search():
   sisters = session.query(Sister).all()
   return render_template('search.html', sisters=sisters)

@@ -55,8 +55,6 @@ class User(UserMixin, Base):
   # def is_anonymous(self):
   #   return False    # anonymous users not allowed
 
-  
-
 # This callback is used to reload the user object from the user ID stored in the session
 @login_manager.user_loader
 def load_user(id):
