@@ -56,10 +56,6 @@ def login():
 
     # redirecting user back to the page that they were originally trying to access
     next_page = request.args.get('next')
-    # if not next_page or url_parse(next_page).netloc != '':
-    if not next_page:
-      next_page = url_for('index')
-
     return redirect(next_page or url_for('index'))
   return render_template('login.html', form=form)
 
