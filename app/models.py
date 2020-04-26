@@ -1,7 +1,7 @@
 import sys
 import os
 
-from app import app, db, login_manager
+from app import app, db, login
 from config import DevelopmentConfig
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -41,22 +41,9 @@ class User(UserMixin, Base):
 
   def check_password(self, password):
     return check_password_hash(self.password_hash, password)
-  
-  # # methods for user class, required for Flask-Login
-  # def is_active(self):
-  #   return True   # all users are active
-
-  # def get_id(self):
-  #   return self.email   # return email address for Flask-Login
-
-  # def is_authenticated(self):
-  #   return self.authenticated
-
-  # def is_anonymous(self):
-  #   return False    # anonymous users not allowed
 
 # This callback is used to reload the user object from the user ID stored in the session
-@login_manager.user_loader
+@login.user_loader
 def load_user(id):
   return session.query(User).get((id))
 
