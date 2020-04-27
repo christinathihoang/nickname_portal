@@ -59,5 +59,14 @@ class Sister(Base):
   year = Column(Integer)
   linenumber = Column(Integer)
 
+class Submission(Base):
+  __tablename__ = "submissions"
+
+  id = Column(String, primary_key=True, nullable=False)
+  big_id = Column(String)
+  nickname = Column(String)
+  meaning = Column(String)
+  pronunciation = Column(String)
+
 Base.metadata.drop_all(engine)    # drops all existing tables
 Base.metadata.create_all(engine)  # creates new tables

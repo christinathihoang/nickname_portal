@@ -14,10 +14,12 @@ login.login_view = 'login'
 
 db = SQLAlchemy(app) 
 
-from app.models import User
+from app.models import User, Submission
 
 admin = Admin(app)
+
 admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Submission, db.session))
 
 # from sqlalchemy.ext.declarative import declarative_base
 # Base = declarative_base()
