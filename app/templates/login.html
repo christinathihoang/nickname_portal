@@ -2,39 +2,105 @@
 
 {% block content %}
 
-<div class="container valign-wrapper">
-  <form action="" method="POST" novalidate> 
-    <div class="card-panel z-depth-5">
+<div class="container pt-5">
 
-      <h4>Login</h4>
-      {{ form.hidden_tag() }}
-
-      <p>
-        {{ form.email.label }}
-        {{ form.email() }}
-        {% for error in form.email.errors %}
-          <span>{{ error }}</span>
-        {% endfor %}
-      </p>
+  <div class="row">
     
-      <p>
-        {{ form.password.label }}
-        {{ form.password() }}
-        {% for error in form.password.errors %}
-          <span>{{ error }}</span>
-        {% endfor %}
-      </p>
-    
-      <p>
-        {{ form.remember_me.label() }}
-        {{ form.remember_me() }}
-      </p>
-    
-      <p>
-        <p>{{ form.submit(class="btn pulse red darken-4") }}</p>
-      </p>
+    <div class="col">
+      <div class="col-8">
+        <h1>Welcome to Ceberus</h1>
+        <p>To request an account, please contact National Board Historian</p>  
+        <img src="../static/images/kappa-phi-lambda-crest.png">
+      </div>
     </div>
-  </form>
+
+
+    <div class="col">
+      <div class="col-10">
+
+        <div class="card shadow-lg">
+          <div class="card-body">
+
+            <!-- Login Card Front -->
+            <div class="login-card">
+              <form action="" method="POST" novalidate> 
+          
+                <h2>Log in</h2>
+                <p>This is a secured system and you need to have an invitation to join</p>
+                {{ form.hidden_tag() }}
+          
+                <p>
+                  {{ form.email.label }}
+                  {{ form.email(class="form-control") }}
+                  {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </p>
+              
+                <p>
+                  {{ form.password.label }}
+                  {{ form.password(class="form-control") }}
+                  {% for error in form.password.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </p>
+              
+                <a>Forgot password?</a>
+              
+                <p>
+                  <p>{{ form.submit(class="btn btn-block bg-danger text-white") }}</p>
+                </p>
+
+                <button class="btn btn-block bg-danger text-white flip-card">Create account</button>
+
+            </form>
+            </div>
+            
+            <!-- Register Card Back -->
+            <div class="register-card">
+              <form action="" method="POST" novalidate> 
+          
+                <h2>Register</h2>
+                <p>This is a secured system and you need to have an invitation to join</p>
+                {{ form.hidden_tag() }}
+          
+                <p>
+                  {{ form.email.label }}
+                  {{ form.email(class="form-control") }}
+                  {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </p>
+              
+                <p>
+                  {{ form.password.label }}
+                  {{ form.password(class="form-control") }}
+                  {% for error in form.password.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </p>
+              
+                <a>Forgot password?</a>
+                <p>
+                  <p>{{ form.submit(class="btn btn-block bg-danger text-white") }}</p>
+                </p>
+
+
+            </form>
+            </div>
+            
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    
+  </div>
+  
+
 </div>
 
 {% endblock %}
