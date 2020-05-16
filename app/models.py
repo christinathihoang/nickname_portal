@@ -13,6 +13,9 @@ from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from flask_admin.contrib.sqla import ModelView
+ 
+
 SQLALCHEMY_DATABASE_URI = 'postgresql://christinahoang:kappas1995@localhost:5432/nickname_portal'
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
 db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
@@ -68,5 +71,7 @@ class Submission(Base):
   meaning = Column(String)
   pronunciation = Column(String)
 
+class MyModelView(ModelView):
+  pass
 Base.metadata.drop_all(engine)    # drops all existing tables
 Base.metadata.create_all(engine)  # creates new tables

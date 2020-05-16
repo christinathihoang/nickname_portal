@@ -1,5 +1,5 @@
-# Nickname Portal
-A web application that allows users to log in, search the database for existing nicknames, and submit new nicknames for approval.
+# Ceberus
+Ceberus is a web application that allows users to log in, search the database for existing nicknames, and submit new nicknames for approval. 
 
 ## Front End Technology
 - Materialize
