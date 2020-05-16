@@ -9,8 +9,11 @@ app = Flask(__name__)
 app.config.from_object(DevelopmentConfig())
 
 
-login = LoginManager(app)
-login.login_view = 'login'
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+@login_manager.user_loader
+def load_user(user_id):
+    return None
 
 db = SQLAlchemy(app) 
 

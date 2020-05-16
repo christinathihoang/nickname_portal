@@ -13,14 +13,24 @@ Base.query = session.query()   # allow flask to access User tables
 
 @app.route('/')
 def index():
+  if current_user.is_authenticated:   # if user is already logged in, then they can't go back to index page
+    return redirect(url_for('home'))
+  
   registrationForm = RegistrationForm()
   loginForm = LoginForm()
   return render_template('index.html', loginForm=loginForm, registrationForm=registrationForm)
 
+@app.route('/home')
+def home():
+  return "Hello"
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+  if current_user.is_authenticated:   # if user is already logged in, then they can't go back to register page
+    return redirect(url_for('home'))
+  
   registrationForm = RegistrationForm()
+  loginForm = LoginForm()
 
   if registrationForm.submit.data and registrationForm.validate_on_submit():
 
@@ -34,17 +44,19 @@ def register():
 
     session.add(user)
     session.commit()
-    return redirect(url_for('users'))
+    return redirect(url_for('login'))
 
-  return render_template('index.html', registrationForm=registrationForm)
+  return render_template('index.html', loginForm=loginForm, registrationForm=registrationForm)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
   if current_user.is_authenticated:   # if user is already logged in, then they can't go back to login page
-    return redirect(url_for('index'))
+    return redirect(url_for('home'))
     
+  registrationForm = RegistrationForm()
   loginForm = LoginForm()
+
   if loginForm.submit.data and loginForm.validate_on_submit():   #if form is empty, returns false and renders template
     user = session.query(User).filter_by(email=loginForm.email.data).first()    # search db for user by email
 
@@ -55,8 +67,8 @@ def login():
 
     # redirecting user back to the page that they were originally trying to access
     next_page = request.args.get('next')
-    return redirect(next_page or url_for('index'))
-  return render_template('index.html', loginForm=loginForm)
+    return redirect(next_page or url_for('home'))
+  return render_template('index.html', loginForm=loginForm, registrationForm=registrationForm)
 
 
 # @app.route('/login', methods=['GET', 'POST'])

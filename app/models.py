@@ -1,7 +1,7 @@
 import sys
 import os
 
-from app import app, db, login
+from app import app, db, login_manager
 from config import DevelopmentConfig
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -46,7 +46,7 @@ class User(UserMixin, Base):
     return check_password_hash(self.password_hash, password)
 
 # This callback is used to reload the user object from the user ID stored in the session
-@login.user_loader
+@login_manager.user_loader
 def load_user(id):
   return session.query(User).get((id))
 
