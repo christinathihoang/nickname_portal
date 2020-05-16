@@ -27,20 +27,20 @@
           
                 <h2>Log in</h2>
                 <p>This is a secured system and you need to have an invitation to join</p>
-                {{ form.hidden_tag() }}
+                {{ loginForm.hidden_tag() }}
           
                 <p>
-                  {{ form.email.label }}
-                  {{ form.email(class="form-control") }}
-                  {% for error in form.email.errors %}
+                  {{ loginForm.email.label }}
+                  {{ loginForm.email(class="form-control") }}
+                  {% for error in loginForm.email.errors %}
                     <span>{{ error }}</span>
                   {% endfor %}
                 </p>
               
                 <p>
-                  {{ form.password.label }}
-                  {{ form.password(class="form-control") }}
-                  {% for error in form.password.errors %}
+                  {{ loginForm.password.label }}
+                  {{ loginForm.password(class="form-control") }}
+                  {% for error in loginForm.password.errors %}
                     <span>{{ error }}</span>
                   {% endfor %}
                 </p>
@@ -48,7 +48,7 @@
                 <a>Forgot password?</a>
               
                 <p>
-                  <p>{{ form.submit(class="btn btn-block bg-danger text-white") }}</p>
+                  <p>{{ loginForm.submit(class="btn btn-block bg-danger text-white") }}</p>
                 </p>
 
                 <button class="btn btn-block bg-danger text-white flip-card">Create account</button>
@@ -62,28 +62,29 @@
           
                 <h2>Register</h2>
                 <p>This is a secured system and you need to have an invitation to join</p>
-                {{ form.hidden_tag() }}
+                {{ registrationForm.hidden_tag() }}
           
                 <p>
-                  {{ form.email.label }}
-                  {{ form.email(class="form-control") }}
-                  {% for error in form.email.errors %}
+                  {{ registrationForm.email.label }}
+                  {{ registrationForm.email(class="form-control") }}
+                  {% for error in registrationForm.email.errors %}
                     <span>{{ error }}</span>
                   {% endfor %}
                 </p>
               
                 <p>
-                  {{ form.password.label }}
-                  {{ form.password(class="form-control") }}
-                  {% for error in form.password.errors %}
+                  {{ registrationForm.password.label }}
+                  {{ registrationForm.password(class="form-control") }}
+                  {% for error in registrationForm.password.errors %}
                     <span>{{ error }}</span>
                   {% endfor %}
                 </p>
               
-                <a>Forgot password?</a>
                 <p>
-                  <p>{{ form.submit(class="btn btn-block bg-danger text-white") }}</p>
+                  <p>{{ registrationForm.submit(class="btn btn-block bg-danger text-white") }}</p>
                 </p>
+
+                <button class="btn btn-block bg-danger text-white flip-card">Back to log-in page</button>
 
 
             </form>

@@ -40,24 +40,62 @@ def register():
   return render_template('register.html', title='Register', form=form)
 
 
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#   if current_user.is_authenticated:   # if user is already logged in, then they can't go back to login page
+#     return redirect(url_for('index'))
+    
+#   form = LoginForm()
+#   if form.validate_on_submit():   #if form is empty, returns false and renders template
+#     user = session.query(User).filter_by(email=form.email.data).first()    # search db for user by email
+
+#     if user is None or not user.check_password(form.password.data):
+#       return redirect(url_for('login'))
+
+#     login_user(user, remember=form.remember_me.data)
+
+#     # redirecting user back to the page that they were originally trying to access
+#     next_page = request.args.get('next')
+#     return redirect(next_page or url_for('index'))
+#   return render_template('login.html', form=form)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
   if current_user.is_authenticated:   # if user is already logged in, then they can't go back to login page
     return redirect(url_for('index'))
     
-  form = LoginForm()
-  if form.validate_on_submit():   #if form is empty, returns false and renders template
-    user = session.query(User).filter_by(email=form.email.data).first()    # search db for user by email
+  loginForm = LoginForm()
+  registrationForm = RegistrationForm()
 
-    if user is None or not user.check_password(form.password.data):
+  # LOGIN FORM
+  if loginForm.validate_on_submit():   #if form is empty, returns false and renders template
+    user = session.query(User).filter_by(email=loginForm.email.data).first()    # search db for user by email
+
+    if user is None or not user.check_password(loginForm.password.data):
       return redirect(url_for('login'))
 
-    login_user(user, remember=form.remember_me.data)
+    # login_user(user, remember=loginForm.remember_me.data)
 
     # redirecting user back to the page that they were originally trying to access
     next_page = request.args.get('next')
     return redirect(next_page or url_for('index'))
-  return render_template('login.html', form=form)
+
+  # REGISTRATION FORM
+  if registrationForm.validate_on_submit():
+    existing = session.query(User).filter_by(email=registrationForm.email.data).first()
+
+    if existing:
+      return redirect(url_for('login'))
+
+    user = User(id=str(uuid.uuid1().int),email=registrationForm.email.data)
+    user.set_password(registrationForm.password.data)
+
+    session.add(user)
+    session.commit()
+    return redirect(url_for('index'))
+
+  return render_template('login.html', loginForm=loginForm, registrationForm=registrationForm)
 
 @app.route('/submission')
 @login_required

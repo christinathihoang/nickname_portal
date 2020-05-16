@@ -13,9 +13,12 @@
 //   let instance = M.Tabs.init(elems, options);
 // })
 
+let flipCardButtons = document.querySelectorAll('.flip-card');
 // event listener to flip login/register card
-document.querySelector('.flip-card').addEventListener("click", function(e) {
-  e.preventDefault();
-  let card = document.querySelector('.card-body')
-  document.querySelector('.card-body').classList.toggle('flipped');
-})
+for (let i = 0; i < flipCardButtons.length; i++) {
+  flipCardButtons[i].addEventListener("click", function(e) {
+    e.preventDefault();
+    let card = document.querySelector('.card-body')
+    document.querySelector('.card-body').classList.toggle('flipped');
+  })
+}
