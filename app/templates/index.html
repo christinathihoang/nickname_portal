@@ -23,7 +23,7 @@
 
             <!-- Login Card Front -->
             <div class="login-card">
-              <form action="" method="POST" novalidate> 
+              <form action="{{ url_for('login') }}" method="post" novalidate> 
           
                 <h2>Log in</h2>
                 <p>This is a secured system and you need to have an invitation to join</p>
@@ -58,7 +58,7 @@
             
             <!-- Register Card Back -->
             <div class="register-card">
-              <form action="" method="POST" novalidate> 
+              <form action="{{ url_for('register') }}" method="post" novalidate> 
           
                 <h2>Register</h2>
                 <p>This is a secured system and you need to have an invitation to join</p>
@@ -76,6 +76,14 @@
                   {{ registrationForm.password.label }}
                   {{ registrationForm.password(class="form-control") }}
                   {% for error in registrationForm.password.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </p>
+
+                <p>
+                  {{ registrationForm.confirm_password.label }}
+                  {{ registrationForm.confirm_password(class="form-control") }}
+                  {% for error in registrationForm.confirm_password.errors %}
                     <span>{{ error }}</span>
                   {% endfor %}
                 </p>

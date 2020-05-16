@@ -18,7 +18,6 @@ let flipCardButtons = document.querySelectorAll('.flip-card');
 for (let i = 0; i < flipCardButtons.length; i++) {
   flipCardButtons[i].addEventListener("click", function(e) {
     e.preventDefault();
-    let card = document.querySelector('.card-body')
     document.querySelector('.card-body').classList.toggle('flipped');
   })
 }
